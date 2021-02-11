@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * test
  * PHP MergeXML usage sample
  * merge multi-selected local xml files
  * 
