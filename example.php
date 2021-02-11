@@ -1,7 +1,6 @@
 <?php
 
 /**
- * test
  * PHP MergeXML usage sample
  * merge multi-selected local xml files
  * 
@@ -11,7 +10,11 @@
  */
 date_default_timezone_set('UTC');
 ini_set('display_errors', true);
-ini_set('log_errors', false);
+ini_set('log_errors', true);
+ini_set('memory_limit', '-1');
+
+
+$filename = "export_" . date("Y.m.d") . ".xml";
 
 require 'mergexml.php';    /* load the class */
 $oMX = new MergeXML(['updn'=>true]);
@@ -22,8 +25,12 @@ if ($oMX->error->code == '') {
 } else {
   $rsp = $oMX->error->text; /* missing feature */
 }
-
+$tmpCert = tmpfile();
+file_put_contents($filename, (string)$rsp);
+header('Content-type: application/xml');
+header('Content-Disposition: attachment; filename="' . $filename . '"');
 echo $rsp;
+die;
 
 /**
  * merge uploaded files
@@ -59,5 +66,6 @@ function FileMerge(MergeXML $xml, $fls) {
     $rtn = $xml->Get(1);
     header("Content-Type: text/plain; charset={$xml->dom->encoding}");
    }
+// echo $rtn;
   return $rtn;
 }

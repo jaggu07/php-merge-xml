@@ -70,6 +70,14 @@ The following files are included:
 
 The MergeXML is realized also in JavaScript (see [github.com]).
 
+For larger files change values in php.ini
+-----------------------------------------
+
+upload_max_filesize = 1024M
+post_max_size = 1024M
+max_input_time = 300
+max_execution_time = 300
+
 ChangeLog
 ---------
 
